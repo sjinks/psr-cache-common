@@ -13,7 +13,7 @@ class UtilsTest extends \PHPUnit\Framework\TestCase
     {
         return [
             [['a', 'b', 'c'],                     ['a', 'b', 'c']],
-            [new \ArrayIterator(['a', 'b', 'c']), ['a', 'b', 'c']]
+            [new \ArrayIterator(['a', 'b', 'c']), ['a', 'b', 'c']],
         ];
     }
 
@@ -26,12 +26,39 @@ class UtilsTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($expected, $actual);
     }
 
+    /**
+     * Data provider for iterableToArray() test
+     *
+     * return array
+     */
+    public static function iterableToArrayProvider()
+    {
+        return [
+            [['a' => 'A', 'b' => 'B', 'c' => 'C'],                     ['a' => 'A', 'b' => 'B', 'c' => 'C']],
+            [new \ArrayIterator(['a' => 'A', 'b' => 'B', 'c' => 'C']), ['a' => 'A', 'b' => 'B', 'c' => 'C']],
+        ];
+    }
+
+    /**
+     * @dataProvider iterableToArrayProvider
+     */
+    public function testIterableToArray($input, $expected)
+    {
+        $actual = \WildWolf\Cache\Utils::iterableToArray($input);
+        $this->assertSame($expected, $actual);
+    }
+
+    /**
+     * Data provider for relativeTtl() test
+     *
+     * return array
+     */
     public function relativeTtlProvider()
     {
         return [
             [new \DateInterval('PT10S'), 10],
             [5,                           5],
-            [null,                     null]
+            [null,                     null],
         ];
     }
 
