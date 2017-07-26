@@ -1,12 +1,14 @@
 <?php
 
-class PsrCacheCommonTest extends PHPUnit\Framework\TestCase
+namespace WildWolf\Tests;
+
+class PsrCacheCommonTest extends \PHPUnit\Framework\TestCase
 {
     public function testCacheItem()
     {
         $this->assertTrue(class_exists('WildWolf\\Cache\\CacheItem', true));
 
-        $item = new WildWolf\Cache\CacheItem('key');
+        $item = new \WildWolf\Cache\CacheItem('key');
         $this->assertEquals('key', $item->getKey());
         $this->assertNull($item->get());
         $this->assertNull($item->expires());
@@ -36,9 +38,9 @@ class PsrCacheCommonTest extends PHPUnit\Framework\TestCase
     {
         $this->assertTrue(class_exists('WildWolf\\Cache\\InvalidArgumentException', true));
 
-        $e = new WildWolf\Cache\InvalidArgumentException;
-        $this->assertInstanceOf(Psr\Cache\InvalidArgumentException::class, $e);
-        $this->assertInstanceOf(Psr\SimpleCache\InvalidArgumentException::class, $e);
+        $e = new \WildWolf\Cache\InvalidArgumentException;
+        $this->assertInstanceOf(\Psr\Cache\InvalidArgumentException::class, $e);
+        $this->assertInstanceOf(\Psr\SimpleCache\InvalidArgumentException::class, $e);
     }
 
     /**
@@ -75,7 +77,7 @@ class PsrCacheCommonTest extends PHPUnit\Framework\TestCase
      */
     public function testValidateKey($key)
     {
-        WildWolf\Cache\Validator::validateKey($key);
+        \WildWolf\Cache\Validator::validateKey($key);
     }
 
     /**
@@ -101,7 +103,7 @@ class PsrCacheCommonTest extends PHPUnit\Framework\TestCase
      */
     public function testValidateBadTtl($ttl)
     {
-        WildWolf\Cache\Validator::validateTtl($ttl);
+        \WildWolf\Cache\Validator::validateTtl($ttl);
     }
 
     /**
@@ -124,7 +126,7 @@ class PsrCacheCommonTest extends PHPUnit\Framework\TestCase
      */
     public function testValidateGoodTtl($ttl)
     {
-        WildWolf\Cache\Validator::validateTtl($ttl);
+        \WildWolf\Cache\Validator::validateTtl($ttl);
         $this->assertTrue(true);
     }
 
@@ -146,7 +148,7 @@ class PsrCacheCommonTest extends PHPUnit\Framework\TestCase
      */
     public function testValidateIterable($item)
     {
-        WildWolf\Cache\Validator::validateIterable($item);
+        \WildWolf\Cache\Validator::validateIterable($item);
         $this->assertTrue(true);
     }
 
@@ -174,7 +176,7 @@ class PsrCacheCommonTest extends PHPUnit\Framework\TestCase
      */
     public function testValidateNonIterable($item)
     {
-        WildWolf\Cache\Validator::validateIterable($item);
+        \WildWolf\Cache\Validator::validateIterable($item);
         $this->assertTrue(true);
     }
 }
