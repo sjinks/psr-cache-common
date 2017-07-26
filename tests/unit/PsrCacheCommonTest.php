@@ -32,6 +32,20 @@ class PsrCacheCommonTest extends \PHPUnit\Framework\TestCase
 
         $item->setIsHit(true);
         $this->assertTrue($item->isHit());
+
+        $now = new \DateTime('now');
+        $item->expiresAfter(10);
+        $value = $item->expires();
+        $diff  = $value->getTimestamp() - $now->getTimestamp();
+        $this->assertTrue($diff < 12);
+        $this->assertTrue($diff > 9);
+
+        $now = new \DateTime('now');
+        $item->expiresAfter(new \DateInterval('PT10S'));
+        $value = $item->expires();
+        $diff  = $value->getTimestamp() - $now->getTimestamp();
+        $this->assertTrue($diff < 12);
+        $this->assertTrue($diff > 9);
     }
 
     public function testInvalidArgumentException()
